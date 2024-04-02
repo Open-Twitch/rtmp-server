@@ -1,0 +1,46 @@
+{
+    "name": "twitch-rtmp-server",
+    "version": "2.1.0",
+    "description": "",
+    "main": "index.ts",
+    "type": "module",
+    "scripts": {
+        "start": "node dist/index.js",
+        "dev": "npm run ts-prepare && nodemon index.ts",
+        "predev": "npm run build",
+        "typecheck": "tsc --noEmit",
+        "ts-prepare": "ts-patch install -s",
+        "build": "tsc && tsc-alias",
+        "release": "standard-version",
+        "release:minor": "standard-version --release-as minor",
+        "release:patch": "standard-version --release-as patch",
+        "release:major": "standard-version --release-as major"
+    },
+    "keywords": [
+        "rtmp",
+        "twitch"
+    ],
+    "author": "Mahdi Ettehadnejad",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^20.4.5",
+        "@types/node-media-server": "^2.3.6",
+        "@typescript-eslint/eslint-plugin": "^5.62.0",
+        "concurrently": "^8.2.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "nodemon": "^3.1.0",
+        "standard-version": "^9.5.0",
+        "ts-node": "^10.9.2",
+        "ts-patch": "^3.1.2",
+        "tsc-alias": "^1.8.8",
+        "typescript": "^5.4.2"
+    },
+    "dependencies": {
+        "node-media-server": "^2.6.6"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}

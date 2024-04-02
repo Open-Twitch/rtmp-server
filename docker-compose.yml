@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+    rtmp-server:
+        container_name: rtmp-server
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: production
+        env_file:
+            - .env
+        ports:
+            - ${PORT}:${PORT}
+        volumes:
+            - ./src:/usr/src/app/src
+            - ./tsconfig.json:/usr/src/app/tsconfig.json
+        external_links:
+            - mongo
+        environment:
+            - NODE_ENV=production
+        command: npm run start
+
+    nginx:
+        image: reverse-proxy
+        restart: always
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile.nginx
+        container_name: ${NGINX_HOST}
+        env_file: .env
+        ports:
+            - ${NGINX_PORT}:${NGINX_PORT}
